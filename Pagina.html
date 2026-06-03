@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desarrollador Web & Especialista TI | Portafolio Pro</title>
+    <!-- FontAwesome para iconos premium -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* --- VARIABLES Y CONFIGURACIÓN NEÓN PREMIUM --- */
+        :root {
+            --bg-principal: #0b0f19;
+            --bg-secundario: #111827;
+            --color-neon: #38bdf8;       /* Celeste Tech */
+            --color-neon-purple: #a855f7; /* Púrpura Eléctrico */
+            --color-texto-full: #ffffff;
+            --color-texto-mutado: #94a3b8;
+            --glass-bg: rgba(17, 24, 39, 0.7);
+            --glass-border: rgba(255, 255, 255, 0.08);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-principal);
+            color: var(--color-texto-full);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* --- BARRA DE NAVEGACIÓN CON EFECTO GLASSMORPHISM --- */
+        header {
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--glass-border);
+            padding: 1.2rem 5%;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.6rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            background: linear-gradient(45deg, var(--color-neon), var(--color-neon-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .logo span {
+            -webkit-text-fill-color: var(--color-texto-full);
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 2.5rem;
+        }
+
+        .nav-links a {
+            color: var(--color-texto-mutado);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--color-neon);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--color-neon);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* --- SECCIÓN HERO (BIENVENIDA) --- */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 1.5rem;
+            background: radial-gradient(circle at 50% 50%, rgba(56, 189, 248, 0.08), transparent 60%);
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            letter-spacing: -1px;
+        }
+
+        .typing-container {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--color-neon);
+            margin-bottom: 2rem;
+            min-height: 40px;
+        }
+
+        .cursor {
+            display: inline-block;
+            background-color: var(--color-neon);
+            margin-left: 4px;
+            width: 3px;
+            animation: parpadeo 0.8s infinite;
+        }
+
+        .hero p {
+            font-size: 1.15rem;
+            max-width: 650px;
+            margin-bottom: 3rem;
+            color: var(--color-texto-mutado);
+        }
+
+        .btn-premium {
+            background: linear-gradient(135deg, var(--color-neon), var(--color-neon-purple));
+            color: var(--bg-principal);
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 700;
+            text-decoration: none;
+            box-shadow: 0 0 20px rgba(56, 189, 248, 0.4);
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-premium:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 30px rgba(168, 85, 247, 0.6);
+            color: #ffffff;
+        }
+
+        /* --- SECCIÓN SERVICIOS --- */
+        .servicios {
+            padding: 7rem 5%;
+            background-color: var(--bg-secundario);
+        }
+
+        .titulo-seccion {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 4rem;
+            font-weight: 700;
+        }
+
+        .titulo-seccion span {
+            background: linear-gradient(45deg, var(--color-neon), var(--color-neon-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .grid-servicios {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .tarjeta-servicio {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--glass-border);
+            padding: 3rem 2rem;
+            border-radius: 16px;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tarjeta-servicio:hover {
+            transform: translateY(-12px);
+            border-color: var(--color-neon);
+            box-shadow: 0 10px 30px rgba(56, 189, 248, 0.1);
+        }
+
+        .icono-wrapper {
+            width: 70px;
+            height: 70px;
+            background: rgba(56, 189, 248, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.8rem;
+            font-size: 2rem;
+            color: var(--color-neon);
+            transition: all 0.3s ease;
+        }
+
+        .tarjeta-servicio:hover .icono-wrapper {
+            background: var(--color-neon);
+            color: var(--bg-principal);
+            box-shadow: 0 0 15px var(--color-neon);
+        }
+
+        .tarjeta-servicio h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .tarjeta-servicio p {
+            color: var(--color-texto-mutado);
+            font-size: 0.95rem;
+        }
+
+        /* --- SECCIÓN HABILIDADES (TECH STACK) --- */
+        .skills-section {
+            padding: 7rem 5%;
+            background-color: var(--bg-principal);
+        }
+
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4rem;
+            max-width: 1100px;
+            margin: 0 auto;
+            align-items: center;
+        }
+
+        .skills-left {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .skills-right {
+            flex: 1;
+            min-width: 300px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            text-align: center;
+        }
+
+        .skill-bar-wrapper {
+            margin-bottom: 1.8rem;
+        }
+
+        .skill-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .bar-fondo {
+            background: #1e293b;
+            height: 8px;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .bar-progreso {
+            height: 100%;
+            background: linear-gradient(90deg, var(--color-neon), var(--color-neon-purple));
+            border-radius: 4px;
+        }
+
+        .tech-badge {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--glass-border);
+            padding: 1.5rem 1rem;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .tech-badge i {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .tech-badge:hover {
+            border-color: var(--color-neon-purple);
+            background: rgba(168, 85, 247, 0.05);
+            transform: scale(1.05);
+        }
+
+        /* --- CONTACTO --- */
+        .contacto {
+            padding: 7rem 5%;
+            background: radial-gradient(circle at bottom, rgba(168, 85, 247, 0.05), transparent 50%);
+            text-align: center;
+        }
+
+        .box-contacto {
+            max-width: 700px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.01);
+            border: 1px solid var(--glass-border);
+            padding: 4rem 2rem;
+            border-radius: 24px;
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-whatsapp {
+            background-color: #25d366;
+            color: #ffffff;
+            padding: 1.2rem 3rem;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 10px 20px rgba(37, 211, 102, 0.2);
+            transition: all 0.3s ease;
+            margin-top: 2rem;
+        }
+
+        .btn-whatsapp:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 15px 30px rgba(37, 211, 102, 0.4);
+        }
+
+        /* --- ANIMACIONES --- */
+        @keyframes parpadeo {
+            50% { opacity: 0; }
+        }
+
+        /* --- RESPONSIVO --- */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hero h1 { font-size: 2.5rem; }
+            .typing-container { font-size: 1.3rem; }
+            .skills-right { grid-template-columns: repeat(2, 1fr); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- BARRA DE NAVEGACIÓN -->
+    <header>
+        <nav class="navbar">
+            <div class="logo">Joao<span>Tech</span></div>
+            <ul class="nav-links">
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#servicios">Servicios</a></li>
+                <li><a href="#habilidades">Expertise</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- SECCIÓN HERO -->
+    <section id="inicio" class="hero">
+        <h1>Transformando Ideas en Código</h1>
+        <div class="typing-container">
+            <span id="txt-dinamico"></span><span class="cursor">&nbsp;</span>
+        </div>
+        <p>Soluciones web optimizadas, arquitecturas de diseño de alto impacto visual y soporte de infraestructura tecnológica remota de nivel avanzado.</p>
+        <a href="#contacto" class="btn-premium">Iniciar Consulta Técnica</a>
+    </section>
+
+    <!-- SECCIÓN SERVICIOS -->
+    <section id="servicios" class="servicios">
+        <h2 class="titulo-seccion">Servicios de <span>Alto Rendimiento</span></h2>
+        
+        <div class="grid-servicios">
+            <div class="tarjeta-servicio">
+                <div class="icono-wrapper"><i class="fa-solid fa-layer-group"></i></div>
+                <h3>Desarrollo Web </h3>
+                <p>Estructuras limpias utilizando semántica HTML5 avanzada, lógica en JavaScript y layouts ultrarresponsivos con CSS Grid y Flexbox. Sitios rápidos que escalan.</p>
+            </div>
+
+            <div class="tarjeta-servicio">
+                <div class="icono-wrapper"><i class="fa-solid fa-id-card"></i></div>
+                <h3>Diseño de Tarjetas Premium</h3>
+                <p>Identidad de marca condensada en layouts minimalistas, lujosos o modernos. Tarjetas de presentación físicas y tarjetas digitales interactivas con códigos QR integrados.</p>
+            </div>
+
+            <div class="tarjeta-servicio">
+                <div class="icono-wrapper"><i class="fa-solid fa-terminal"></i></div>
+                <h3>Mantenimiento Remoto Avanzado</h3>
+                <p>Optimización y diagnóstico profundo de sistemas operativos, despliegue de software, seguridad informática y soporte remoto fluido a través de canales seguros.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN HABILIDADES -->
+    <section id="habilidades" class="skills-section">
+        <div class="skills-container">
+            <div class="skills-left">
+                <h2 style="font-size: 2.2rem; margin-bottom: 1.5rem; font-weight: 700;">Mis Habilidades <span>Métricas</span></h2>
+                <p style="color: var(--color-texto-mutado); margin-bottom: 2.5rem;">Cada solución es desarrollada bajo estrictos estándares de optimización, rendimiento lógico y legibilidad de código limpio.</p>
+                
+                <div class="skill-bar-wrapper">
+                    <div class="skill-info"><span>Desarrollo Web e Interfaz (HTML/CSS)</span><span>95%</span></div>
+                    <div class="bar-fondo"><div class="bar-progreso" style="width: 95%;"></div></div>
+                </div>
+                <div class="skill-bar-wrapper">
+                    <div class="skill-info"><span>Diseño de Producto & Branding</span><span>88%</span></div>
+                    <div class="bar-fondo"><div class="bar-progreso" style="width: 88%;"></div></div>
+                </div>
+                <div class="skill-bar-wrapper">
+                    <div class="skill-info"><span>Lógica, Scripts & Diagnóstico Técnico</span><span>90%</span></div>
+                    <div class="bar-fondo"><div class="bar-progreso" style="width: 90%;"></div></div>
+                </div>
+            </div>
+
+            <div class="skills-right">
+                <div class="tech-badge" style="color: #e34c26;"><i class="fa-brands fa-html5"></i><p>HTML5</p></div>
+                <div class="tech-badge" style="color: #264de4;"><i class="fa-brands fa-css3-alt"></i><p>CSS3</p></div>
+                <div class="tech-badge" style="color: #f0db4f;"><i class="fa-brands fa-js"></i><p>JavaScript</p></div>
+                <div class="tech-badge" style="color: #007acc;"><i class="fa-solid fa-laptop-code"></i><p>VSC</p></div>
+                <div class="tech-badge" style="color: #a855f7;"><i class="fa-solid fa-bezier-curve"></i><p>Design</p></div>
+                <div class="tech-badge" style="color: #38bdf8;"><i class="fa-solid fa-sliders"></i><p>TI Linux/Win</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN CONTACTO -->
+    <section id="contacto" class="contacto">
+        <div class="box-contacto">
+            <h2 style="font-size: 2.3rem; margin-bottom: 1rem; font-weight: 700;">¿Listo para implementar tecnología de punta?</h2>
+            <p style="color: var(--color-texto-mutado);">Agenda un diagnóstico de requerimientos. Respuesta técnica garantizada en menos de 24 horas.</p>
+            
+            <a href="https://wa.me/573054443573?text=Hola,%20Estoy%20Interesado%20en%20Tus%20servicios" target="_blank" class="btn-whatsapp">
+                <i class="fa-brands fa-whatsapp"></i> Conectar por Canal Seguro
+            </a>
+        </div>
+    </section>
+
+    <!-- PIE DE PÁGINA -->
+    <footer style="background-color: var(--bg-secundario); text-align: center; padding: 2.5rem; font-size: 0.9rem; border-top: 1px solid var(--glass-border);">
+        <p style="color: var(--color-texto-mutado);">&copy; 2026 DevCore System. Ejecutando soluciones de alto impacto.</p>
+    </footer>
+
+    <!-- LÓGICA JAVASCRIPT CORREGIDA -->
+    <script>
+        const palabras = ["Creador de Sitios Web Modernos.", "Diseñador de Tarjetas Exclusivas.", "Especialista en Soporte Remoto Global."];
+        let palabraIndex = 0;
+        let letraIndex = 0;
+        let borrando = false;
+        const textoElemento = document.getElementById("txt-dinamico");
+
+        function efectoEscritura() {
+            if (!textoElemento) return;
+            const palabraActual = palabras[palabraIndex];
+            
+            if (!borrando) {
+                textoElemento.textContent = palabraActual.substring(0, letraIndex + 1);
+                letraIndex++;
+                if (letraIndex === palabraActual.length) {
+                    borrando = true;
+                    setTimeout(efectoEscritura, 2000);
+                    return;
+                }
+            } else {
+                textoElemento.textContent = palabraActual.substring(0, letraIndex - 1);
+                letraIndex--;
+                if (letraIndex === 0) {
+                    borrando = false;
+                    palabraIndex = (palabraIndex + 1) % palabras.length;
+                }
+            }
+            
+            const velocidad = borrando ? 40 : 80;
+            setTimeout(efectoEscritura, velocidad);
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            efectoEscritura();
+        });
+    </script>
+</body>
+</html>
