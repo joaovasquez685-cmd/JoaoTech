@@ -335,7 +335,7 @@
         .project-card h3 { font-size: 1.4rem; margin-bottom: 0.75rem; }
         .project-card p { color: var(--text-secondary); margin-bottom: 1.5rem; line-height: 1.6; }
 
-        /* DASHBOARD - NUEVA SECCIÓN */
+        /* DASHBOARD */
         .dashboard-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-bottom: 4rem; }
         .dash-card {
             background: var(--card-bg); border: 1px solid var(--border-color);
@@ -374,7 +374,7 @@
             transition: all 0.3s ease;
         }
         .achievement-item:hover { transform: translateX(5px); }
-        .achievement-emoji { font-size: 2rem; }
+        .achievement-emoji { font-size: 2rem; min-width: 40px; text-align: center; }
         .achievement-title { font-weight: 600; margin-bottom: 0.25rem; }
         .achievement-desc { font-size: 0.85rem; color: var(--text-secondary); }
         .tech-progress {
@@ -394,7 +394,6 @@
         .fun-facts h3 { font-size: 1.5rem; margin-bottom: 2rem; }
         .fun-facts h3 i { color: var(--accent-cyan); margin-right: 0.5rem; }
         .fun-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; }
-        .fun-item { }
         .fun-emoji { font-size: 3rem; margin-bottom: 0.5rem; }
         .fun-label { font-weight: 600; margin-bottom: 0.25rem; }
         .fun-number { color: var(--text-secondary); font-size: 1.5rem; font-family: 'Space Grotesk', sans-serif; }
@@ -670,7 +669,7 @@
         </div>
     </section>
 
-    <!-- DASHBOARD - SECCIÓN ÚNICA -->
+    <!-- DASHBOARD -->
     <section id="dashboard">
         <div class="section-header fade-in">
             <span class="section-tag">// Developer Mode</span>
@@ -679,7 +678,7 @@
         </div>
 
         <div class="dashboard-grid">
-            <!-- TARJETA 1: CODING STATS -->
+            <!-- CODING STATS -->
             <div class="dash-card fade-in">
                 <div class="glow" style="background: rgba(0, 212, 255, 0.1);"></div>
                 <div class="dash-header">
@@ -723,7 +722,7 @@
                 </div>
             </div>
 
-            <!-- TARJETA 2: LOGROS -->
+            <!-- LOGROS -->
             <div class="dash-card fade-in">
                 <div class="glow" style="background: rgba(184, 41, 221, 0.1);"></div>
                 <div class="dash-header">
@@ -753,7 +752,7 @@
                 </div>
 
                 <div class="achievement-item" style="background: rgba(255, 0, 110, 0.05); border: 1px solid rgba(255, 0, 110, 0.2);">
-                    <div class="achievement-emoji"></div>
+                    <div class="achievement-emoji">⚡</div>
                     <div>
                         <div class="achievement-title">Speed Coder</div>
                         <div class="achievement-desc">Sitio web en 24h</div>
@@ -769,7 +768,7 @@
                 </div>
             </div>
 
-            <!-- TARJETA 3: CURRENTLY CODING -->
+            <!-- CURRENTLY CODING -->
             <div class="dash-card fade-in">
                 <div class="glow" style="background: rgba(0, 255, 136, 0.1);"></div>
                 <div class="dash-header">
@@ -1039,12 +1038,13 @@
         document.querySelectorAll('.fade-in').forEach(el => iframeObserver.observe(el));
 
         // ============================================
-        // CONTADORES STATS
+        // CONTADORES UNIVERSALES
         // ============================================
-        const statNumbers = document.querySelectorAll('.stat-number');
-        const statsObserver = new IntersectionObserver((entries) => {
+        const allCounters = document.querySelectorAll('[data-target]');
+        const counterObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                if (entry.isIntersecting) {
+                if (entry.isIntersecting && !entry.target.dataset.animated) {
+                    entry.target.dataset.animated = 'true';
                     const el = entry.target;
                     const target = parseInt(el.dataset.target);
                     let current = 0;
@@ -1052,17 +1052,17 @@
                     const timer = setInterval(() => {
                         current += increment;
                         if (current >= target) {
-                            el.textContent = target + (target === 100 ? '%' : '+');
+                            el.textContent = target.toLocaleString();
                             clearInterval(timer);
                         } else {
-                            el.textContent = Math.floor(current);
+                            el.textContent = Math.floor(current).toLocaleString();
                         }
                     }, 30);
-                    statsObserver.unobserve(el);
+                    counterObserver.unobserve(el);
                 }
             });
         }, { threshold: 0.5 });
-        statNumbers.forEach(el => statsObserver.observe(el));
+        allCounters.forEach(el => counterObserver.observe(el));
 
         // ============================================
         // BARRAS DE PROGRESO DASHBOARD
@@ -1077,32 +1077,6 @@
             });
         }, { threshold: 0.5 });
         progressBars.forEach(bar => barsObserver.observe(bar));
-
-        // ============================================
-        // CONTADORES FUN FACTS
-        // ============================================
-        const funNumbers = document.querySelectorAll('.fun-number[data-target]');
-        const funObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const el = entry.target;
-                    const target = parseInt(el.dataset.target);
-                    let current = 0;
-                    const increment = target / 30;
-                    const timer = setInterval(() => {
-                        current += increment;
-                        if (current >= target) {
-                            el.textContent = target.toLocaleString();
-                            clearInterval(timer);
-                        } else {
-                            el.textContent = Math.floor(current).toLocaleString();
-                        }
-                    }, 50);
-                    funObserver.unobserve(el);
-                }
-            });
-        }, { threshold: 0.5 });
-        funNumbers.forEach(el => funObserver.observe(el));
 
         // ============================================
         // PROTECCIÓN PROYECTOS
